@@ -1,8 +1,7 @@
 package eivense.springboot.learning.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TestController {
@@ -13,13 +12,9 @@ public class TestController {
     }
 
 
-    @RequestMapping("test1")
-    public String test1() {
-        return "test1";
-    }
-
-    @RequestMapping("test2")
-    public String test2() {
+    @RequestMapping(value = "test2",method = RequestMethod.POST)
+    public String test2(@RequestBody String body) {
+        System.out.println(body);
         return "test2";
     }
 }
