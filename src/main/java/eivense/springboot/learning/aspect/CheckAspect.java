@@ -1,14 +1,15 @@
 package eivense.springboot.learning.aspect;
 
 
+import eivense.springboot.learning.util.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
 
 @Component("CheckAspect")
 @Aspect
@@ -16,18 +17,20 @@ import java.util.Optional;
 public class CheckAspect {
 
 
+    // 使用了@Controller和@RestController注解的类中的所有方法
+    @Pointcut("@within(org.springframework.stereotype.Controller)||@within(org.springframework.web.bind.annotation.RestController)")
+    public void controller(){}
 
 
-    /**
-     * Return request current thread bound or null if none bound.
-     *
-     * @return Current request or null
-     */
-    private HttpServletRequest currentRequest() {
+    @Around("controller()")
+    public Object verifyHeader(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        HttpServletRequest request = RequestUtil.getCurrentRequest();
+        String ipAddr = RequestUtil.getRemoteHost(request);
+        String url = request.getRequestURL().toString();
+        log.info("Request IP: {} ,Request URL: {}",ipAddr,url);
 
-        // 通过RequestContextHolder获取当前线程的request 基于ThreadLocal
-        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        return Optional.ofNullable(servletRequestAttributes).map(ServletRequestAttributes::getRequest).orElse(null);
+        Object result = proceedingJoinPoint.proceed();
+        return result;
     }
 
 }
