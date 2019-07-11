@@ -28,7 +28,7 @@ public class CheckAspect {
         String ipAddr = RequestUtil.getRemoteHost(request);
         String url = request.getRequestURL().toString();
         log.info("Request IP: {} ,Request URL: {}",ipAddr,url);
-
+        log.info("Header: {}", request.getHeaderNames());
         Object result = proceedingJoinPoint.proceed();
         return result;
     }
