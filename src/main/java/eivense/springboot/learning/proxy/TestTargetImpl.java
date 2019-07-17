@@ -1,7 +1,9 @@
 package eivense.springboot.learning.proxy;
 
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class TestTargetImpl implements TestTarget{
 
     @Override
