@@ -6,11 +6,13 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component("LogAspect")
 @Slf4j
+@Order(11)
 public class LogAspect {
 
     @Pointcut("execution(* eivense.springboot.learning.controller.TestController.*(..))")

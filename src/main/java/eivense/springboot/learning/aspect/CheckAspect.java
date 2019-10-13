@@ -7,6 +7,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 @Component("CheckAspect")
 @Aspect
 @Slf4j
+@Order(10)
 public class CheckAspect {
 
 

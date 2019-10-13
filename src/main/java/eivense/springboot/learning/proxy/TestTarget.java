@@ -3,8 +3,9 @@ package eivense.springboot.learning.proxy;
 public interface TestTarget {
 
     @ProxyMethod
-    public void A();
+    public String A();
 
 
-    public void B();
+    @ProxyMethod
+    public String B();
 }
