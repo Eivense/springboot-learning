@@ -1,19 +1,17 @@
 package eivense.springboot.learning.config;
 
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
+//@PropertySource("classpath:config.yml")
+//@ConfigurationProperties(prefix="redis")
 @Slf4j
-@Data
-@PropertySource("classpath:redis-config.yml")
 public class JedisConfig {
 
     @Value("${redis.host}")

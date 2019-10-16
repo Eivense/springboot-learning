@@ -3,10 +3,12 @@ package eivense.springboot.learning.controller;
 
 import eivense.springboot.learning.proxy.TestProxy;
 import eivense.springboot.learning.proxy.TestTarget;
+import eivense.springboot.learning.util.RedisUtil;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Proxy;
 
 @RestController
@@ -17,6 +19,8 @@ public class TestController {
     @Autowired
     public BeanFactory beanFactory;
 
+    @Autowired
+    public RedisUtil redisUtil;
 
     @RequestMapping("1")
     public String test(){
@@ -56,6 +60,20 @@ public class TestController {
 
 
         return target.A();
+    }
+
+
+    @RequestMapping("set")
+    public void testRedisSet(HttpServletRequest request){
+        String key=request.getParameter("key");
+        String value=request.getParameter("value");
+        redisUtil.set(key,value);
+    }
+
+    @RequestMapping("get")
+    public String testRedisGet(HttpServletRequest request){
+        String key = request.getParameter("key");
+        return redisUtil.get(key);
     }
 
 }
