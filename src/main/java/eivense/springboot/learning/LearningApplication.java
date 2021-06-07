@@ -15,13 +15,4 @@ public class LearningApplication {
     }
 
 
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer properties(){
-        PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
-        YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();
-        yaml.setResources(new ClassPathResource("config.yml"));
-        configurer.setProperties(yaml.getObject());
-        return configurer;
-    }
-
 }

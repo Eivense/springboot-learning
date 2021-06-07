@@ -6,3 +6,23 @@ spring:
     remote:
       restart:
         enabled: true
+  application:
+    name: learning
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: root
+    password: root
+
+  redis:
+    jedis:
+     host: 127.0.0.1
+     port: 6379
+
+thread-pool:
+  coreSzie: 4
+  maxSize: 10
+  queueSize: 15
+  keepAliveTime: 3000
+
