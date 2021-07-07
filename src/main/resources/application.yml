@@ -22,7 +22,7 @@ spring:
 
 thread-pool:
   coreSzie: 4
-  maxSize: 10
-  queueSize: 15
+  maxSize: 100
+  queueSize: 150
   keepAliveTime: 3000
 
